@@ -53,44 +53,37 @@ class TaskList extends React.PureComponent {
         dataIndex: 'name',
         // filters: names,
         sorter: (a, b) => a.name.localeCompare(b.name),
-        render: (text, record) => (
-            this.linkRender(text, record.id, 'tasks')
-        ),
+        render: (text, record) => this.linkRender(text, record.id, 'tasks'),
     }, {
         title: 'Project',
         dataIndex: 'project.name',
+        sorter: (a, b) => a.project.name.localeCompare(b.project.name),
         render: (text, record) => this.linkRender(text, record.project.id, 'projects'),
-        
-        sorter: (a, b) => this.sorter(a.project.name, b.project.name)
     }, {
         title: 'Tasks list',
         dataIndex: 'boardList.name',
-        render: (text, record) => this.linkRender(text, record.id, 'tasks'),        
-        sorter: (a, b) => {
-            return a.boardList.name.localeCompare(b.boardList.name);
-        }
+        sorter: (a, b) => a.boardList.name.localeCompare(b.boardList.name),
+        render: (text, record) => this.linkRender(text, record.id, 'tasks'),
     }, {
         title: 'Person',
         dataIndex: 'person.name',
-        render: (text, record) => (
-            this.linkRender(text, record.person.id, 'persons')
-        ),
         sorter: (a, b) => a.person.name.localeCompare(b.person.name),
+        render: (text, record) => this.linkRender(text, record.person.id, 'persons'),
     }, {
         title: 'Private',
         dataIndex: 'private',
         sorter: (a, b) => a.private || b.private,
-        render: (text) => this.boolRender(text)
+        render: (text) => this.boolRender(text),
     }, {
         title: 'Start',
         dataIndex: 'startDate',
-        sorter: (a, b) => a.startDate.localeCompare(b.startDate),
-        render: (text) => this.timeRender(text)
+        sorter: (a, b) => (''+a.startDate).localeCompare(''+b.startDate),
+        render: (text) => this.timeRender(text),
     }, {
         title: 'End',
         dataIndex: 'dueDate',
-        sorter: (a, b) => a.dueDate.localeCompare(b.dueDate),
-        render: (text) => this.timeRender(text)
+        sorter: (a, b) => (''+ a.dueDate).localeCompare(''+b.dueDate),
+        render: (text) => this.timeRender(text),
     }];
 
     render() {
