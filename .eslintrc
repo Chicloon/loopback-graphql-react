@@ -1,0 +1,13 @@
+{
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true,
+      "modules": true
+    }
+  },
+  "rules": {
+    "no-unused-vars": 0,
+    "no-unreachable": 0
+  }
+}

@@ -1,0 +1,68 @@
+/* ColorPicker */
+
+@import "../../../styles/vars";
+
+.color-picker {
+	display: inline-block;
+	position: relative;
+
+	.color-picker-button {
+		display: inline-block;
+		vertical-align: middle;
+		width: 50px;
+		height: 30px;
+		text-align: center;
+		line-height: 30px;
+		color: #fff;
+		text-decoration: none;
+		border-radius: 3px;
+		&:hover {
+			text-decoration: none;
+		}
+	}
+
+	.color-picker-popover {
+
+		@include box-shadow();
+		position: absolute;
+		top: 35px;
+		width: 300px;
+		height: 60px;
+		z-index: 1001;
+		background: #fff;
+		border: 1px solid $brightBorder;
+		border-radius: 3px;
+		padding: 5px;
+
+		.cover {
+			@extend .cover;
+			z-index: 1000;
+		}
+
+		.color {
+			display: inline-block;
+			vertical-align: middle;
+			border-radius: 0;
+			border: 3px solid white;
+			margin-right: 2px;
+			margin-bottom: 2px;
+			width: 22px;
+			height: 22px;
+			text-align: center;
+			line-height: 19px;
+			font-size: 11px;
+			transition: border 100ms;
+			text-decoration: none;
+
+			&:hover {
+				border: 0 solid white;
+				text-decoration: none;
+			}
+
+			&:active,
+			&:focus {
+				text-decoration: none;
+			}
+		}
+	}
+}

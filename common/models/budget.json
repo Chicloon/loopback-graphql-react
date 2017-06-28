@@ -1,0 +1,94 @@
+{
+	"name": "Budget",
+	"base": "PersistedModel",
+	"idInjection": true,
+	"mixins": {
+		"Owner": true
+	},
+	"options": {
+		"validateUpsert": true
+	},
+	"properties": {
+		"name": {
+			"type": "String",
+			"index": true
+		},
+		"sum": {
+			"type": "Number",
+			"required": false,
+			"index": true,
+			"default": 0,
+			"postgresql": {
+				"dataType": "FLOAT8"
+			}
+		},
+		"paid": {
+			"type": "Number",
+			"required": false,
+			"index": true,
+			"default": 0,
+			"description": "Вычисляемое поле. Сумма всех поступлений в бюджет.",
+			"postgresql": {
+				"dataType": "FLOAT8"
+			}
+		},
+		"tax": {
+			"type": "Number",
+			"required": false,
+			"index": true,
+			"default": 0,
+			"precision": 2,
+			"postgresql": {
+				"dataType": "FLOAT8"
+			}
+		},
+		"percentLeft": {
+			"type": "Number",
+			"index": true,
+			"description": "Вычисляемое поле. Нераспределенный процент бюджета.",
+			"postgresql": {
+				"dataType": "FLOAT8"
+			}
+		},
+		"comment": {
+			"type": "String",
+			"index": true
+		}
+	},
+	"validations": [],
+	"relations": {
+		"comments": {
+			"type": "hasAndBelongsToMany",
+			"model": "Comment"
+		},
+		"attachments": {
+			"type": "hasAndBelongsToMany",
+			"model": "Attachment"
+		},
+		"labels": {
+			"type": "hasAndBelongsToMany",
+			"model": "Label"
+		},
+		"budgetRoles": {
+			"type": "hasMany",
+			"model": "BudgetRole",
+			"foreignKey": "budgetId"
+		},
+		"payments": {
+			"type": "hasMany",
+			"model": "Payment",
+			"foreignKey": "budgetId"
+		},
+		"project": {
+			"type": "belongsTo",
+			"model": "Project",
+			"foreignKey": "projectId"
+		}
+	},
+	"acls": [{
+		"principalType": "ROLE",
+		"principalId": "$authenticated",
+		"permission": "ALLOW"
+	}],
+	"methods": {}
+}

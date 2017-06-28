@@ -1,0 +1,86 @@
+{
+	"name": "Person",
+	"plural": "Persons",
+	"base": "PersistedModel",
+	"idInjection": true,
+	"mixins": {
+		"Owner": true
+	},
+	"options": {
+		"validateUpsert": true
+	},
+	"properties": {
+		"firstName": {
+			"type": "string",
+			"required": false,
+			"index": true
+		},
+		"lastName": {
+			"type": "string",
+			"required": false,
+			"index": true
+		},
+		"middleName": {
+			"type": "string",
+			"required": false,
+			"index": true
+		},
+		"paymentInfo": {
+			"type": "string",
+			"required": false,
+			"index": true
+		},
+		"avatar": {
+			"type": "string",
+			"required": false,
+			"index": true
+		},
+		"comment": {
+			"type": "string",
+			"required": false,
+			"index": true
+		}
+	},
+	"validations": [],
+	"relations": {
+		"tasks": {
+			"type": "hasMany",
+			"model": "Task",
+			"foreignKey": "personId",
+			"description": "Задачи"
+		},
+		"comments": {
+			"type": "hasAndBelongsToMany",
+			"model": "Comment"
+		},
+		"attachments": {
+			"type": "hasAndBelongsToMany",
+			"model": "Attachment"
+		},
+		"labels": {
+			"type": "hasAndBelongsToMany",
+			"model": "Label"
+		},
+		"budgetRoles": {
+			"type": "hasMany",
+			"model": "BudgetRole",
+			"foreignKey": "personId"
+		},
+		"payments": {
+			"type": "hasMany",
+			"model": "Payment",
+			"foreignKey": "personId"
+		},
+		"boardLists": {
+			"type": "hasMany",
+			"model": "BoardList",
+			"foreignKey": "personId"
+		}
+	},
+	"acls": [{
+		"principalType": "ROLE",
+		"principalId": "$authenticated",
+		"permission": "ALLOW"
+	}],
+	"methods": {}
+}

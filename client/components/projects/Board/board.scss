@@ -1,0 +1,444 @@
+@import '../../../styles/vars';
+
+$boardlistBorderWidth: 3px;
+
+.board-page {
+	position: relative;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+
+	.board-lists-container {
+		display: flex;
+		flex-direction: row;
+		flex-grow: 1;
+		overflow-x: auto;
+		overflow-y: hidden;
+		white-space: nowrap;
+		list-style: none;
+		padding: 0;
+		margin: 0;
+
+		&.dragging {
+			cursor: -webkit-grabbing;
+			cursor: -moz-grabbing;
+			cursor: grabbing;
+
+			* {
+				cursor: -webkit-grabbing !important;
+				cursor: -moz-grabbing !important;
+				cursor: grabbing !important;
+			}
+		}
+	}
+
+	#draggable-task {
+		position: absolute;
+		z-index: 50;
+		pointer-events: none;
+		width: 240px;
+		height: 100px;
+		display: block;
+
+		.task-content {
+			-webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+			-moz-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+		}
+
+		&.hidden {
+			display: none;
+		}
+	}
+
+	#draggable-list {
+		position: absolute;
+		z-index: 50;
+		pointer-events: none;
+		background: #fff;
+		border-radius: $borderRadius;
+		margin-top: 0;
+
+		.board-list-header {
+			//background: #fff;
+		}
+
+		&.hidden {
+			display: none;
+		}
+	}
+
+}
+
+.board-empty {
+	padding: 15px;
+}
+
+.board-header {
+	height: 40px;
+	padding: 5px 10px;
+	line-height: 30px;
+	background: #eee;
+	margin: 0 15px 15px 5px;
+
+	h1 {
+		font-size: 18px;
+		margin: 0;
+	}
+}
+
+.board-list-wrapper, #draggable-list {
+	z-index: 20;
+	display: inline-block;
+	white-space: nowrap;
+	vertical-align: top;
+	margin-right: 10px;
+	height: inherit;
+	width: 240px;
+	//flex-grow: 1;
+
+	.board-list {
+		width: 240px;
+		height: 100%;
+		display: flex;
+		position: relative;
+		flex-direction: column;
+
+		.board-list-header {
+			background: #f0f0f0;
+			width: 230px;
+			height: 40px;
+			flex-shrink: 0;
+			line-height: 21px;
+			padding: 10px 5px 10px 10px;
+			margin-bottom: 5px;
+			border: 1px solid $border;
+			border-left-width: $boardlistBorderWidth;
+			display: flex;
+			align-items: center;
+
+			.board-list-name {
+				flex-basis: 70%;
+				flex-grow: 2;
+				flex-shrink: 1;
+				display: inline-block;
+				height: 20px;
+				//max-width: 70%;
+				word-wrap: break-word;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				text-transform: uppercase;
+				text-decoration: none;
+				font-weight: 500;
+
+				&:hover {
+					text-decoration: underline;
+				}
+			}
+
+			.board-list-controls {
+				flex-grow: 1;
+				flex-shrink: 0;
+				padding-left: 10px;
+				display: inline-block;
+
+				.add-task-link {
+					display: inline-block;
+					width: 20px;
+					height: 20px;
+					margin-left: 5px;
+					@include border-radius();
+
+					&:hover {
+						background: #ccc;
+					}
+
+					&.disabled {
+						cursor: default;
+						color: #ccc;
+						&:hover {
+							background: none;
+						}
+					}
+				}
+			}
+
+			.debug-info {
+				padding: 5px 0;
+			}
+
+		}
+
+		.add-task {
+			display: none;
+			width: 230px;
+			font-size: 14px;
+
+			.edit-new-task {
+				display: none;
+				cursor: pointer;
+				background: #f0f0f0;
+				padding: 10px;
+				border-radius: $borderRadius;
+				border: 1px solid $border;
+				border-left: 3px solid #ccc;
+				-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+				-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+				box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+
+				.btn {
+					margin-right: 5px;
+				}
+
+				textarea {
+					display: block;
+					width: 100%;
+					padding: 5px;
+					border: 1px solid $border;
+					font-size: 14px;
+					margin-bottom: 10px;
+				}
+			}
+
+			&.active {
+				display: block;
+				margin: 5px 0;
+
+				.edit-new-task {
+					display: block;
+				}
+
+				.add-task-link {
+					display: none;
+				}
+			}
+		}
+
+		.tasks-list-wrapper {
+			flex-grow: 1;
+			overflow-y: auto;
+
+			.tasks-list {
+				width: 240px;
+			}
+		}
+
+		.shadow-top {
+			pointer-events: none;
+			position: absolute;
+			left: 0;
+			width: 240px;
+			height: 60px;
+			opacity: 0;
+			background: linear-gradient(to bottom, rgba(255,255,255, 0.9) 0%, rgba(255,255,255, 0) 100%);
+			transition: opacity 250ms;
+		}
+
+		.shadow-bottom {
+			pointer-events: none;
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			width: 240px;
+			height: 60px;
+			background: linear-gradient(to top, rgba(255,255,255, 0.9) 0%, rgba(255,255,255, 0) 100%);
+			transition: opacity 250ms;
+		}
+
+	}
+
+	&:last-of-type {
+		margin-right: 15px;
+	}
+
+	&.is-dragging {
+		z-index: 10;
+
+		.board-list-header {
+			opacity: 0.5;
+
+			.edit-link {
+				opacity: 0.5;
+				&:hover {
+					text-decoration: none;
+				}
+			}
+
+			.add-task {
+				.add-task-link {
+					opacity: 0;
+				}
+			}
+
+		}
+
+		.tasks-list {
+			opacity: 0.5;
+
+			* {
+				opacity: 0;
+			}
+		}
+	}
+
+	.tasks-list {
+		white-space: normal;
+		list-style: none;
+		border-bottom-left-radius: 3px;
+		border-bottom-right-radius: 3px;
+		background: #fff;
+		transform-origin: top;
+	}
+
+}
+
+.task-card {
+	width: 230px;
+	z-index: 40;
+	transform-origin: top;
+	padding-top: 5px;
+	padding-bottom: 5px;
+
+	.task-content {
+		cursor: pointer;
+		background: #fdfdfd;
+		padding: 10px 10px 10px 10px;
+		//border-radius: $borderRadius;
+		word-wrap: break-word;
+		border: 1px solid $border;
+		border-left: $boardlistBorderWidth solid #ccc;
+		-webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+		-moz-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+		box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+
+		.labels {
+			height: 16px;
+			padding: 6px 0 0 0;
+		}
+
+		.avatar,
+		.empty-avatar {
+			float: right;
+			margin: -3px -1px 0 13px;
+		}
+
+		.task-info {
+			color: $veryBrightText;
+			margin-top: 5px;
+			margin-left: -2px;
+		}
+	}
+
+	&.is-dragging {
+		z-index: 30;
+
+		.task-content {
+			opacity: 0.5;
+			background: #eee;
+			* {
+				opacity: 0.5;
+				color: #555 !important;
+			}
+		}
+	}
+
+	&:last-of-type {
+		.task-content {
+			margin-bottom: 0;
+		}
+	}
+}
+
+.board-overlay {
+	display: table;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.5);
+	z-index: 100;
+
+	.board-overlay-inner {
+		display: table-cell;
+		vertical-align: middle;
+		z-index: 100;
+	}
+
+}
+
+.board-add-list {
+	width: 230px;
+	display: inline-block;
+	vertical-align: top;
+	margin: 0 15px 5px 0;
+	height: 54px;
+
+	.add-list-btn {
+		display: block;
+		width: 40px;
+		height: 40px;
+		text-align: center;
+		background: #f0f0f0;
+		@include border-radius;
+		border: 1px solid $border;
+		line-height: 20px;
+		padding: 10px 5px;
+		color: #666;
+		//cursor: text;
+		text-decoration: none;
+	}
+
+	.add-list-form {
+		display: none;
+		//padding: 10px;
+
+		.btn {
+			margin-right: 10px;
+		}
+
+		input {
+			display: block;
+			width: 230px;
+			height: 34px;
+			background: #fff;
+			border-radius: $borderRadius;
+			line-height: 30px;
+			padding: 5px 10px;
+			color: #666;
+			cursor: text;
+			text-decoration: none;
+			border: 1px solid $border;
+			-webkit-box-shadow: inset 1px 1px 5px $weakShadowColor;
+			-moz-box-shadow: inset 1px 1px 5px $weakShadowColor;
+			box-shadow: inset 1px 1px 5px $weakShadowColor;
+			margin-bottom: 10px;
+		}
+	}
+
+	&.active {
+		height: 95px;
+
+		.add-list-form {
+			display: block;
+		}
+
+		.add-list-btn {
+			display: none;
+		}
+	}
+
+	.add-list-debug {
+		height: 25px;
+	}
+}
+
+.debug-info {
+	font-size: 12px;
+	color: #aaa;
+	margin-bottom: 10px;
+}
+

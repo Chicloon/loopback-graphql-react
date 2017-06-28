@@ -1,0 +1,49 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# local settings for datasource
+server/datasources.local.json
+
+# storage
+storage
+
+
+# dependencies
+node_modules
+
+# testing
+coverage
+
+# production
+build
+
+# logs
+logs
+
+# misc
+.DS_Store
+.env
+.idea
+.project
+.strong-pm
+npm-debug.log
+
+# npm
+package-lock.json
+
+# yarn
+yarn.lock
+
+# other
+marmelab
+
+# files
+*.dat
+*.iml
+*.log
+*.out
+*.pid
+*.seed
+*.sublime-*
+*.swo
+*.swp
+*.tgz

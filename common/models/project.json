@@ -1,0 +1,107 @@
+{
+	"name": "Project",
+	"description": "Проект",
+	"base": "PersistedModel",
+	"idInjection": true,
+	"mixins": {
+		"Owner": true,
+		"Member": {
+			"relations": [
+				"owner",
+				["members", "person", "owner"]
+			],
+			"roles": ["admin"]
+		}
+	},
+	"options": {
+		"validateUpsert": true
+	},
+	"scope": {
+		"order": "priority DESC"
+	},
+	"properties": {
+		"name": {
+			"type": "string",
+			"required": false,
+			"index": true,
+			"description": "Название проекта"
+		},
+		"priority": {
+			"type": "Number",
+			"required": false,
+			"index": true,
+			"default": 0,
+			"description": "Приоритет проекта относительно других проектов, чем ниже значение приоритета выше приоритет. Проект с приоритетом 0 приоритетней проекта с приоритетом 10."
+		},
+		"private": {
+			"type": "Boolean",
+			"required": false,
+			"default": true,
+			"index": true,
+			"description": "Признак приватности проекта. Приватные проекты видны только участникам проекта и пользователям/ролям имеющим права видеть приватные проекты."
+		},
+		"description": {
+			"type": "string",
+			"required": false,
+			"description": "Описение проекта"
+		}
+	},
+	"validations": [],
+	"relations": {
+		"comments": {
+			"type": "hasAndBelongsToMany",
+			"model": "Comment"
+		},
+		"attachments": {
+			"type": "hasAndBelongsToMany",
+			"model": "Attachment"
+		},
+		"labels": {
+			"type": "hasAndBelongsToMany",
+			"model": "Label"
+		},
+		"budgets": {
+			"type": "hasMany",
+			"model": "Budget",
+			"foreignKey": "projectId",
+			"description": "Бюджеты проекта"
+		},
+		"boardLists": {
+			"type": "hasMany",
+			"model": "BoardList",
+			"foreignKey": "projectId",
+			"description": "Списки задач проекта"
+		},
+		"tasks": {
+			"type": "hasMany",
+			"model": "Task",
+			"foreignKey": "projectId",
+			"description": "Задача проекта"
+		},
+		"client": {
+			"type": "belongsTo",
+			"model": "Client",
+			"foreignKey": "clientId",
+			"description": "Клиент проекта"
+		},
+		"members": {
+			"type": "hasMany",
+			"model": "ProjectMember",
+			"foreignKey": "projectId",
+			"description": "Участники проекта"
+		},
+		"persons": {
+			"type": "hasMany",
+			"model": "Person",
+			"foreignKey": "projectId",
+			"through": "ProjectMember"
+		}
+	},
+	"acls": [{
+		"principalType": "ROLE",
+		"principalId": "$member",
+		"permission": "ALLOW",
+		"accessType": "READ"
+	}],
+	"methods": {}
+}

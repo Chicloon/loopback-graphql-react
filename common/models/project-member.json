@@ -1,0 +1,44 @@
+{
+	"name": "ProjectMember",
+	"base": "PersistedModel",
+	"idInjection": true,
+	"description": "Участник проекта",
+	"options": {
+		"validateUpsert": true
+	},
+	"properties": {
+		"comment": {
+			"type": "string",
+			"required": false,
+			"index": true,
+			"description": "Коментарий к роли"
+		}
+	},
+	"validations": [],
+	"relations": {
+		"role": {
+			"type": "belongsTo",
+			"model": "ProjectRole",
+			"foreignKey": "projectRoleId",
+			"description": "Роль участника в проекте"
+		},
+		"project": {
+			"type": "belongsTo",
+			"model": "Project",
+			"foreignKey": "projectId",
+			"description": "Проект"
+		},
+		"person": {
+			"type": "belongsTo",
+			"model": "Person",
+			"foreignKey": "personId",
+			"description": "Участник проекта"
+		}
+	},
+	"acls": [{
+		"principalType": "ROLE",
+		"principalId": "$authenticated",
+		"permission": "ALLOW"
+	}],
+	"methods": {}
+}

@@ -1,0 +1,62 @@
+{
+	"name": "Comment",
+	"description": "Комментарии",
+	"base": "PersistedModel",
+	"idInjection": true,
+	"mixins": {
+		"Owner": true
+	},
+	"options": {
+		"validateUpsert": true
+	},
+	"properties": {
+		"text": {
+			"type": "string",
+			"required": false,
+			"index": true,
+			"description": "Текст комментария"
+		},
+		"date": {
+			"type": "Date",
+			"required": false,
+			"index": true
+		}
+	},
+	"validations": [],
+	"relations": {
+		"attachments": {
+			"type": "hasAndBelongsToMany",
+			"model": "Attachment"
+		},
+		"persons": {
+			"type": "hasAndBelongsToMany",
+			"model": "Person"
+		},
+		"tasks": {
+			"type": "hasAndBelongsToMany",
+			"model": "Task"
+		},
+		"payments": {
+			"type": "hasAndBelongsToMany",
+			"model": "Payment"
+		},
+		"budgets": {
+			"type": "hasAndBelongsToMany",
+			"model": "Budget"
+		},
+		"clients": {
+			"type": "hasAndBelongsToMany",
+			"model": "Client"
+		},
+		"projects": {
+			"type": "hasAndBelongsToMany",
+			"model": "Project"
+		}
+	},
+	"acls": [{
+		"principalType": "ROLE",
+		"principalId": "$authenticated",
+		"permission": "ALLOW"
+	}],
+	"methods": {}
+}

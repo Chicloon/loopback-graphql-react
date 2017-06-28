@@ -1,0 +1,63 @@
+{
+	"name": "Attachment",
+	"description": "Прикрепленные файлы",
+	"base": "PersistedModel",
+	"idInjection": true,
+	"mixins": {
+		"Owner": true
+	},
+	"options": {
+		"validateUpsert": true
+	},
+	"properties": {
+		"name": {
+			"type": "string",
+			"required": false,
+			"index": true,
+			"description": "Название аттача"
+		},
+		"filename": {
+			"type": "string",
+			"required": false,
+			"index": true,
+			"description": "Полное имя файла как оно было загружено"
+		}
+	},
+	"validations": [],
+	"relations": {
+		"comments": {
+			"type": "hasAndBelongsToMany",
+			"model": "Comment"
+		},
+		"persons": {
+			"type": "hasAndBelongsToMany",
+			"model": "Person"
+		},
+		"tasks": {
+			"type": "hasAndBelongsToMany",
+			"model": "Task"
+		},
+		"payments": {
+			"type": "hasAndBelongsToMany",
+			"model": "Payment"
+		},
+		"budgets": {
+			"type": "hasAndBelongsToMany",
+			"model": "Budget"
+		},
+		"clients": {
+			"type": "hasAndBelongsToMany",
+			"model": "Client"
+		},
+		"projects": {
+			"type": "hasAndBelongsToMany",
+			"model": "Project"
+		}
+	},
+	"acls": [{
+		"principalType": "ROLE",
+		"principalId": "$authenticated",
+		"permission": "ALLOW"
+	}],
+	"methods": {}
+}

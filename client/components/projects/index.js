@@ -1,0 +1,10 @@
+export const ProjectIcon = "project";
+export { default as ProjectList } from './List';
+export { default as ProjectRoot } from './Root';
+export { default as ProjectRoute } from './ProjectRoute';
+export { default as ProjectBoard } from './Board';
+export { default as Labels } from './Labels';
+export { default as ProjectDashboard } from './Dashboard';
+export { default as ProjectEdit } from './Edit';
+export { default as ProjectCreate } from './Edit';
+export { default as ProjectBar } from './Bar';

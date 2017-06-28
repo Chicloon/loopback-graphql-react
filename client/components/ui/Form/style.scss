@@ -1,0 +1,222 @@
+@import "../../../styles/vars";
+
+.data-form {
+
+	width: 100%;
+	//overflow-x: hidden;
+
+	h2 {
+		[class^="icon-"]:before {
+			color: $uiColor1;
+			display: inline-block;
+			font-size: 18px;
+			line-height: 30px;
+			padding-left: 5px;
+			width: 30px;
+			height: 30px;
+			text-align: left;
+			margin-left: -5px;
+			margin-right: 0;
+		}
+	}
+
+	label {
+		color: #888;
+		font-size: 85%;
+		display: block;
+		font-weight: normal;
+	}
+}
+
+.form-input {
+	margin-bottom: 25px;
+
+	input,
+	select,
+	textarea {
+		width: 100%;
+		border-radius: $borderRadius;
+		border: 1px solid $border;
+		padding: $inputVPad $inputHPad;
+		background: $editBg;
+
+		&:hover {
+			border-color: $uiColor1alpha;
+		}
+	}
+
+	.value {
+		@include border-radius;
+		display: block;
+		height: 34px;
+		padding: $inputVPad $inputHPad;
+		line-height: 23px;
+		border: 1px solid $border;
+		background: $editBg;
+	}
+
+	&.plain {
+		.value {
+			display: inline;
+			height: auto;
+			border: 0;
+			background: none;
+			padding: 0;
+		}
+	}
+
+	textarea {
+		padding: $inputHPad;
+	}
+
+	select option {
+		height: 34px;
+	}
+
+}
+
+.empty.field .value {
+	//background: $brightBg;
+}
+
+.drop-down {
+	clear: both;
+	border: 1px solid $border;
+	position: relative;
+	@include border-radius;
+
+	&:hover {
+		border-color: $uiColor1alpha;
+	}
+
+	.drop-down-search {
+		cursor: pointer;
+		padding: $inputVPad 37px $inputVPad $inputHPad;
+		border: 0;
+		text-overflow: ellipsis;
+
+		&::-webkit-input-placeholder {
+			color: #000;
+		}
+		&::-moz-placeholder {
+			color: #000;
+		}
+		&:-ms-input-placeholder {
+			color: #000;
+		}
+		&::placeholder {
+			color: #000;
+		}
+
+		&:focus {
+			cursor: text;
+			&::-webkit-input-placeholder {
+				color: $veryBrightText;
+			}
+			&::-moz-placeholder {
+				color: $veryBrightText;
+			}
+			&:-ms-input-placeholder {
+				color: $veryBrightText;
+			}
+			&::placeholder {
+				color: $veryBrightText;
+			}
+		}
+	}
+
+	.down-icon {
+		cursor: pointer;
+		color: #666;
+		font-size: 12px;
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		transition: transform $animationTime;
+		&.active {
+			transform: rotate(180deg);
+		}
+	}
+
+	&.active {
+		z-index: 2000;
+
+		&:hover {
+			border-color: $border;
+		}
+	}
+
+	.placeholder {
+		@include border-radius;
+		//border: 1px solid $border;
+		background: $editBg;
+		padding: $inputVPad $inputHPad;
+		line-height: 24px;
+		cursor: pointer;
+	}
+
+	.list {
+		position: absolute;
+		top: 34px;
+		max-height: calc(11 * 35px);
+		overflow-y: auto;
+		left: -1px;
+		right: 0;
+		background: #fff;
+		border: 1px solid $border;
+		@include border-radius;
+		@include box-shadow;
+
+		.item {
+			display: block;
+			padding: $inputVPad $inputHPad;
+			line-height: 24px;
+			height: 34px;
+			border-bottom: 1px solid $border;
+			text-decoration: none;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+
+			&:last-of-type {
+				border-bottom: 0;
+			}
+
+			&:hover {
+				background: $hoverBg;
+			}
+
+			&.selected {
+				background: $selectedBg;
+			}
+		}
+
+		.more {
+			border-top: 1px solid $border;
+			padding: $inputVPad $inputHPad;
+			height: 34px;
+			line-height: 24px;
+
+			a {
+				color: $uiColor1;
+				&:hover {
+					color: #000;
+				}
+				margin-right: 10px;
+			}
+		}
+	}
+
+}
+
+.form-submit {
+	padding: 15px 0;
+
+	.btn {
+		margin-right: 15px;
+	}
+}
+
+.fixed-width {
+	max-width: 960px;
+}

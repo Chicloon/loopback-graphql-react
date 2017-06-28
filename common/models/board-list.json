@@ -1,0 +1,71 @@
+{
+	"name": "BoardList",
+	"description": "Список задач",
+	"base": "PersistedModel",
+	"idInjection": true,
+	"mixins": {
+		"Owner": true
+	},
+	"options": {
+		"validateUpsert": true
+	},
+	"scope": {
+		"order": "priority DESC"
+	},
+	"properties": {
+		"name": {
+			"type": "string",
+			"required": false,
+			"index": true,
+			"description": "Название списка задач"
+		},
+		"color": {
+			"type": "string",
+			"required": false,
+			"index": true,
+			"description": "Цвет списка в ccs формате."
+		},
+		"priority": {
+			"type": "Number",
+			"required": false,
+			"index": true,
+			"description": "Приоритет списка задач относительно других списков. Меньшее значение - больший приоритет.",
+			"default": 0,
+			"postgresql": {
+				"dataType": "FLOAT8"
+			}
+		},
+		"description": {
+			"type": "string",
+			"required": false,
+			"description": "Описание списка"
+		}
+	},
+	"validations": [],
+	"relations": {
+		"project": {
+			"type": "belongsTo",
+			"model": "Project",
+			"foreignKey": "projectId",
+			"description": "Проект к которому относится список. Если не указано, то отображается во всех проектах."
+		},
+		"person": {
+			"type": "belongsTo",
+			"model": "Person",
+			"foreignKey": "personId",
+			"description": "Ответственный за список. Задачи попадающие в этот список, автоматически, назначаются на него."
+		},
+		"tasks": {
+			"type": "hasMany",
+			"model": "Task",
+			"foreignKey": "boardListId",
+			"description": "Задачи в списке."
+		}
+	},
+	"acls": [{
+		"principalType": "ROLE",
+		"principalId": "$authenticated",
+		"permission": "ALLOW"
+	}],
+	"methods": {}
+}

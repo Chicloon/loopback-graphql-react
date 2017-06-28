@@ -1,0 +1,617 @@
+@import 'vars';
+@import '../components/ui/ui';
+
+html, body {
+	padding: 0;
+	margin: 0;
+	font: 14px 'Roboto', sans-serif;
+}
+
+html, body {
+	height: 100%;
+}
+
+#root {
+	width: 100%;
+	height: 100%;
+	position: relative;
+	overflow: hidden;
+}
+
+.mui-ripple-circle {
+	display: none
+}
+
+h2 {
+	[class^="icon-"]:before {
+		color: $uiColor1;
+		display: inline-block;
+		font-size: 18px;
+		line-height: 30px;
+		padding-left: 5px;
+		width: 30px;
+		height: 30px;
+		text-align: left;
+		margin-left: -5px;
+		margin-right: 0;
+	}
+}
+
+/* fontello fix */
+
+[class^="icon-"]:before, [class*=" icon-"]:before {
+	vertical-align: middle;
+}
+
+/* layout */
+
+#app-container {
+	width: 100%;
+	height: 100%;
+	position: relative;
+	overflow: hidden;
+
+	.menu-cover {
+		z-index: 2000;
+		position: absolute;
+		background: rgba(255,255,255,0.5);
+		left: $menuWidth;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		transition: background $animationTime;
+	}
+
+	#menu-wrapper {
+		position: absolute;
+		left: 0;
+		top: 0;
+		bottom: 0;
+		width: $menuWidth;
+		//overflow-x: hidden; // this breaks menu-cover visibility
+		background: $menuBg;
+		color: white;
+		transform: translateX(-$menuWidth);
+	}
+
+	#menu {
+		//z-index: 3000;
+		width: $menuWidth;
+		overflow-x: hidden; // this breaks menu-cover visibility
+		background: $menuBg;
+		color: white;
+		position: absolute;
+		transform: translateX(-$menuWidth);
+		top: 0;
+		bottom: 0;
+
+		.user-section {
+			position: relative;
+			.logout-link {
+				position: absolute;
+				z-index: 1;
+				right: 3px;
+				font-weight: normal;
+				color: $menuIcon;
+				&:hover {
+					color: #fff;
+				}
+			}
+		}
+
+		.shadow {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			right: 0;
+			width: 40px;
+			background: linear-gradient(to right, rgba(0,0,0, 0) 0%, rgba(0,0,0, 0.15) 100%);
+			//background: #800;
+			z-index: 0;
+		}
+
+		.logo {
+			height: 30px;
+			padding: 15px 10px 20px 25px;
+			font-size: 20px;
+			font-weight: 300;
+			//text-transform: uppercase;
+			a {
+				color: #d0d8e0;
+				text-decoration: none;
+
+				em {
+					color: #7c0;
+					font-style: normal;
+				}
+			}
+		}
+
+		.menu-title {
+			display: block;
+			height: 70px;
+			line-height: 50px;
+			padding: 10px 10px 10px 25px;
+		}
+
+		.menu-content {
+			position: absolute;
+			list-style: none;
+			padding: 0 0 30px 0;
+			top: 10px;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			overflow-x: hidden;
+			overflow-y: scroll;
+			margin-right: -16px;
+
+			a {
+				display: block;
+				width: $menuWidth;
+				padding: 12px 10px 12px 25px;
+				color: $menuItemColor;
+				background: rgba(0, 0, 0, 0);
+				transition: background 200ms;
+				text-decoration: none;
+				font-family: 'Roboto', sans-serif;
+				font-weight: 300;
+				font-size: 13px;
+				position: relative;
+
+				&:hover {
+					color: $menuItemColor;
+					background: $hoverMenuBg;
+					text-decoration: none;
+				}
+
+				[class^="icon-"] {
+					opacity: 0.9;
+					color: $menuIcon;
+					//color: #fff;
+					margin-right: 15px;
+					font-size: 14px;
+				}
+
+				&.active {
+					color: $activeMenuColor;
+					border-left: 3px solid $activeMenuBorder;
+					padding-left: 22px;
+					background: $activeMenuBg;
+					[class^="icon-"] {
+						opacity: 1;
+						color: $activeMenuIcon;
+					}
+				}
+
+				.right-element {
+					z-index: 1;
+					font-weight: normal;
+					//float: right;
+					display: inline-block;
+					vertical-align: middle;
+					position: absolute;
+					right: 10px;
+					width: 30px;
+					height: 20px;
+					//line-height: 20px;
+					text-align: center;
+
+					[class^="icon-"] {
+						z-index: 1;
+						display: inline-block;
+						margin-right: 0;
+						font-size: 12px;
+						transition: all 100ms ease-out;
+					}
+
+					&.badge {
+
+					}
+				}
+			}
+
+			.subheader,
+			.sub-menu-title {
+				padding: 15px 20px 0 25px;
+				height: 41px;
+				line-height: 11px;
+				font-size: 11px;
+				font-weight: 300;
+				text-transform: uppercase;
+				color: rgba(220, 235, 255, .5);
+			}
+
+			.sub-menu {
+				overflow: hidden;
+				height: 41px;
+				transition: height 1000ms;
+				//background: $subMenuBg;
+
+				.link,
+				.subheader {
+					display: none;
+					padding-left: 25px;
+					&.active {
+						padding-left: 22px;
+					}
+				}
+
+				&.active {
+					height: auto;
+					.right-element {
+						[class^="icon-"] {
+							vertical-align: middle;
+							transform: rotate(90deg);
+						}
+					}
+					.link,
+					.subheader {
+						display: block;
+					}
+				}
+
+				&.locked {
+					.sub-menu-title {
+						cursor: default;
+						&:hover {
+							color: rgba(220, 235, 255, .5);
+							background: $menuBg;
+						}
+					}
+					.right-element {
+						[class^="icon-"] {
+							transform: none;
+							color: $menuIcon;
+							opacity: 1;
+							&:before {
+								content: '\f13e';
+							}
+						}
+					}
+				}
+			}
+
+		}
+
+		&.with-user {
+			.menu-content {
+				top: 100px;
+			}
+		}
+
+	}
+
+	.right-wrapper {
+		z-index: 2;
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		//display: flex;
+		//flex-direction: column;
+
+		#appbar {
+			position: absolute;
+			background: #fff;
+			left: 0;
+			top: 0;
+			right: 0;
+			//width: 100%;
+			height: 50px;
+			line-height: 50px;
+			color: $text;
+			padding: 0 15px;
+			overflow: hidden;
+			//display: flex;
+			//flex-direction: row;
+
+			#menu-toggle-btn {
+				float: left;
+				//display: inline-block;
+				flex-shrink: 0;
+				flex-grow: 0;
+				font-size: 14px;
+				cursor: pointer;
+				padding: 10px 0 10px 2px;
+				margin-left: 0px;
+				text-align: left;
+				line-height: 28px;
+				width: 40px;
+				height: 50px;
+			}
+
+			h1 {
+				flex-grow: 1;
+				display: inline-block;
+				font-size: 16px;
+				font-weight: normal;
+				padding: 0;
+				line-height: 50px;
+				margin: 0 15px 0 0;
+				vertical-align: middle;
+				max-width: calc(100% - 40px);
+				word-wrap: break-word;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+
+				em {
+					font-style: normal;
+					color: $brightText;
+				}
+			}
+
+			a {
+				color: $text;
+			}
+
+		}
+
+		#appbar-shadow {
+			pointer-events: none;
+			position: absolute;
+			opacity: 0;
+			z-index: 100;
+			top: 50px;
+			left: 0;
+			right: 0;
+			height: 15px;
+			background: linear-gradient(to bottom, rgba(0,0,0, 0.15) 0%, rgba(0,0,0, 0) 100%);
+		}
+
+		#main-content {
+			position: absolute;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			top: 50px;
+			padding: 0 15px 15px 20px;
+			overflow-y: auto;
+			//flex-grow: 1;
+			display: flex;
+		}
+
+	}
+
+	&.animation {
+		#menu {
+			transition: transform $animationTime, width $animationTime;
+		}
+		.right-wrapper {
+			transition: transform $animationTime, left $animationTime;
+		}
+	}
+
+	&.authorized {
+		#main-content > div,
+		#main-content .full-size {
+			flex-grow: 1;
+			width: 100%;
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+		}
+	}
+
+
+	/*
+	&.authorized {
+		#main-content {
+			flex-grow: 1;
+			width: 100%;
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+		}
+	}
+	*/
+
+	div.error {
+		padding: 10px;
+		background: #fcc;
+		border: 1px solid #ccc;
+		margin: 15px 0;
+	}
+
+	&.menu-pinned,
+	&.menu-pinned-hidden {
+
+		#menu {
+			transform: translateX(0);
+			width: $pinnedMenuWidth;
+
+			.menu-title {
+				display: none;
+			}
+
+			.menu-content {
+				top: 0;
+
+				.subheader {
+					overflow: hidden;
+					text-indent: -9999px;
+					height: 1px;
+					padding: 0;
+					margin: 15px 0;
+					background: rgba(255, 255, 255, 0.2);
+					&:first-of-type {
+						margin: 0;
+						background: none;
+					}
+				}
+
+				a {
+					padding-left: 12px;
+				}
+
+				[class^="icon-"] {
+					opacity: .8;
+					margin-right: 0;
+					font-size: 16px;
+				}
+
+				.right-element {
+					display: none;
+				}
+
+				.text {
+					display: none;
+				}
+
+				&::-webkit-scrollbar {
+					display: none;
+				}
+
+				.sub-menu {
+					background: $menuBg;
+
+					.link,
+					.subheader {
+						display: block;
+					}
+
+					.sub-menu-title {
+						display: none;
+					}
+
+				}
+			}
+		}
+
+		.menu-cover {
+			display: none;
+		}
+
+		.right-wrapper {
+			transform: translateX($pinnedMenuWidth);
+		}
+
+	}
+
+	&.menu-pinned-hidden {
+		#menu {
+			width: $pinnedMenuWidth;
+			transform: translateX(-$pinnedMenuWidth);
+		}
+		.menu-cover,
+		.right-wrapper {
+			transform: translateX(0);
+		}
+	}
+
+	&.menu-active {
+		#menu {
+			transform: translateX(0);
+		}
+	}
+
+	&.menu-hidden {
+		.menu-cover {
+			display: none;
+		}
+	}
+
+	&.unauthorized {
+		background: #f0f6f8;
+		.right-wrapper {
+			left: 0;
+			top: 0;
+		}
+	}
+
+	.notifications {
+		position: absolute;
+		right: 10px;
+		z-index: 3000;
+		top: 60px;
+
+		.notification {
+			width: 240px;
+			padding: 10px 15px;
+			background: rgba(0,0,0,0.75);
+			font-weight: normal;
+			color: #fff;
+			margin-bottom: 10px;
+		}
+
+		.lastNotification {
+			//opacity: 0.4;
+			display: none;
+		}
+	}
+
+	@media screen and (max-width: 959px) {
+		&.menu-active {
+			.right-wrapper {
+				//right: auto !important;
+				transform: translateX($menuWidth);
+			}
+		}
+	}
+
+	@media screen and (min-width: 960px) {
+		.menu-cover {
+			display: none;
+		}
+		&.menu-active {
+			.menu-cover,
+			.right-wrapper {
+				left: $menuWidth !important;
+				transform: translateX(0);
+			}
+		}
+		&.menu-pinned {
+			.menu-cover,
+			.right-wrapper {
+				left: $pinnedMenuWidth !important;
+				transform: translateX(0) !important;
+			}
+		}
+
+	}
+
+}
+
+.login-wrapper {
+
+	margin: auto;
+	width: 90%;
+	max-width: 360px;
+	height: 360px;
+
+	.login-header {
+		text-align: left;
+		padding: 15px 17px;
+	}
+
+	.login-form {
+		@include border-radius;
+		@include box-shadow;
+		background: #fff;
+		border: 1px solid $border;
+		padding: 15px;
+
+		p {
+			margin: 0 0 15px 0;
+		}
+
+		label {
+			font-weight: normal;
+		}
+
+		input {
+			background: #fff;
+		}
+
+		input:-webkit-autofill {
+			-webkit-box-shadow: 0 0 0 1000px #eff8ff inset !important;
+		}
+	}
+
+	.error {
+		padding: 15px 17px;
+	}
+}
+

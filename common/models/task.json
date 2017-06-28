@@ -1,0 +1,97 @@
+{
+	"name": "Task",
+	"description": "Задача",
+	"base": "PersistedModel",
+	"idInjection": true,
+	"mixins": {
+		"Owner": true
+	},
+	"options": {
+		"validateUpsert": true
+	},
+	"scope": {
+		"order": "priority DESC"
+	},
+	"properties": {
+		"name": {
+			"type": "string",
+			"required": false,
+			"index": true,
+			"description": "Название задачи"
+		},
+		"priority": {
+			"type": "Number",
+			"postgresql": {
+				"dataType": "FLOAT8"
+			},
+			"required": false,
+			"index": true,
+			"default": 0,
+			"description": "Приоритет задачи относительно других других задач в проекте, чем ниже значение приоритета выше приоритет. Задача с приоритетом 0 приоритетней задачи с приоритетом 10."
+		},
+		"private": {
+			"type": "Boolean",
+			"required": false,
+			"default": true,
+			"index": true,
+			"description": "Признак приватности задачи. Приватные задачи видны только участникам задачи и пользователям/ролям имеющим права видеть приватные задачи в проекте."
+		},
+		"startDate": {
+			"type": "Date",
+			"required": false,
+			"index": true,
+			"description": "Дата начала задачи. Может быть пустой, в этом случае она попадает в список задач в завимости от приоритета"
+		},
+		"dueDate": {
+			"type": "Date",
+			"required": false,
+			"index": true,
+			"description": "Дата зваершения задачи. Может быть пустой, датой окончания задачи будет дата закрытия (перенос задачи в Закрывающий список) задачи."
+		},
+		"description": {
+			"type": "string",
+			"required": false,
+			"description": "Описание задачи"
+		}
+	},
+	"validations": [],
+	"relations": {
+		"comments": {
+			"type": "hasAndBelongsToMany",
+			"model": "Comment"
+		},
+		"attachments": {
+			"type": "hasAndBelongsToMany",
+			"model": "Attachment"
+		},
+		"labels": {
+			"type": "hasAndBelongsToMany",
+			"model": "Label",
+			"foreignKey": "taskId"
+		},
+		"project": {
+			"type": "belongsTo",
+			"model": "Project",
+			"foreignKey": "projectId",
+			"description": "Проект задачи"
+		},
+		"person": {
+			"type": "belongsTo",
+			"model": "Person",
+			"foreignKey": "personId",
+			"description": "Текущий ответственный за задачу."
+		},
+		"boardList": {
+			"type": "belongsTo",
+			"model": "BoardList",
+			"foreignKey": "boardListId",
+			"description": "Список доски в котором находится задача."
+		}
+	},
+	"acls": [{
+		"principalType": "ROLE",
+		"principalId": "$authenticated",
+		"permission": "ALLOW"
+	}],
+	"methods": {}
+}

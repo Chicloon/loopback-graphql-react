@@ -1,0 +1,21 @@
+@import '../../styles/vars';
+
+.budget-row {
+	margin: 30px -15px;
+}
+
+.incoming-payments,
+.outgoing-payments {
+	padding: 20px 0;
+}
+
+.budget-roles {
+	padding: 20px 0;
+	thead {
+		//display: none;
+	}
+
+	.field-person {
+
+	}
+}

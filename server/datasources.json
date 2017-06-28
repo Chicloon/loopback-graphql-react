@@ -1,0 +1,13 @@
+{
+	"postgres": {
+		"database": "smartoffice-dev",
+		"name": "postgres",
+		"connector": "postgresql"
+	},
+	"storage": {
+		"name": "storage",
+		"connector": "loopback-component-storage",
+		"provider": "filesystem",
+		"maxFileSize": 104857600
+	}
+}

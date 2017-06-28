@@ -1,0 +1,97 @@
+{
+	"_meta": {
+		"sources": [
+			"loopback/common/models",
+			"loopback/server/models",
+			"../common/models"
+		],
+		"mixins": [
+			"loopback/common/mixins",
+			"loopback/server/mixins",
+			"../common/mixins"
+		]
+	},
+	"Container": {
+		"dataSource": "storage",
+		"public": true
+	},
+	"User": {
+		"dataSource": "postgres",
+		"public": true,
+		"strict": false
+	},
+	"AccessToken": {
+		"dataSource": "postgres",
+		"public": true,
+		"strict": false
+	},
+	"ACL": {
+		"dataSource": "postgres",
+		"public": true,
+		"strict": false
+	},
+	"RoleMapping": {
+		"dataSource": "postgres",
+		"public": true,
+		"strict": false
+	},
+	"Role": {
+		"dataSource": "postgres",
+		"public": true,
+		"strict": false
+	},
+	"Person": {
+		"dataSource": "postgres",
+		"public": true
+	},
+	"Project": {
+		"dataSource": "postgres",
+		"public": true
+	},
+	"ProjectRole": {
+		"dataSource": "postgres",
+		"public": true
+	},
+	"Budget": {
+		"dataSource": "postgres",
+		"public": true
+	},
+	"BudgetRole": {
+		"dataSource": "postgres",
+		"public": true
+	},
+	"Payment": {
+		"dataSource": "postgres",
+		"public": true
+	},
+	"Client": {
+		"dataSource": "postgres",
+		"public": true
+	},
+	"Task": {
+		"dataSource": "postgres",
+		"public": true
+	},
+	"BoardList": {
+		"dataSource": "postgres",
+		"public": true
+	},
+	"Label": {
+		"dataSource": "postgres",
+		"public": true
+	},
+	"ProjectMember": {
+		"dataSource": "postgres",
+		"public": true
+	},
+	"Attachment": {
+		"dataSource": "postgres",
+		"public": true,
+		"strict": false
+	},
+	"Comment": {
+		"dataSource": "postgres",
+		"public": true,
+		"strict": false
+	}
+}

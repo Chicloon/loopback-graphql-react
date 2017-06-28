@@ -1,0 +1,218 @@
+@import "../../../styles/vars";
+
+.RichEditor-root {
+	background: $editBg;
+	color: #000;
+	padding: 0;
+	border: 1px solid $border;
+
+	.rich-controls {
+		background: rgba(200, 200, 200, 0.5);
+		padding: 3px 5px;
+	}
+
+	.RichEditor-editor {
+		cursor: text;
+		padding: $inputVPad $inputHPad;
+
+		.public-DraftEditor-content {
+			padding: 5px 0;
+		}
+
+		.public-DraftEditorPlaceholder-root {
+			padding: 5px 0;
+			position: absolute;
+			color: #ccc;
+		}
+
+		&.simple {
+			line-height: 21px;
+
+			.public-DraftEditorPlaceholder-root,
+			.public-DraftEditor-content {
+				margin: 0;
+				padding: 0;
+			}
+		}
+	}
+
+	&.inline {
+		border: 1px solid transparent;
+		margin: 0 -5px;
+		padding: 4px;
+
+		.rich-controls {
+			opacity: 0.5;
+		}
+
+		&:hover {
+			border: 1px solid $border;
+			.rich-controls {
+				opacity: 1;
+			}
+		}
+
+		.RichEditor-editor {
+			padding: 0;
+		}
+
+		&.active {
+			border: 1px solid $border;
+
+			.rich-controls {
+				opacity: 1;
+			}
+		}
+
+	}
+
+}
+
+
+
+.RichEditor-hidePlaceholder .public-DraftEditorPlaceholder-root {
+	display: none;
+}
+
+.RichEditor-editor .RichEditor-blockquote {
+	color: #666;
+	font-family: 'Hoefler Text', 'Georgia', serif;
+	font-style: italic;
+	margin: 16px 0;
+	font-size: 14px;
+	//background: rgba(255,255,255,0.7);
+	//border: 1px solid rgba(0,0,0,0.1);
+	border-left: 5px solid $border;
+	padding: 5px 15px;
+}
+
+.RichEditor-editor .public-DraftStyleDefault-pre {
+	background-color: rgba(0, 0, 0, 0.05);
+	font-family: 'Inconsolata', 'Menlo', 'Consolas', monospace;
+	border: 0;
+	padding: 5px;
+	//font-size: 16px;
+	//padding: 20px;
+
+	pre {
+		border: 0;
+		padding: 0;
+	}
+}
+
+.RichEditor-controls {
+	display: inline;
+	font-family: 'Helvetica', sans-serif;
+	font-size: 14px;
+	margin-right: 10px;
+	user-select: none;
+}
+
+.RichEditor-styleButton {
+	color: #000;
+	background: transparent;
+	//background: #ccc;
+	cursor: pointer;
+	margin-right: 8px;
+	margin-top: 1px;
+	margin-bottom: 1px;
+	padding: 2px 5px;
+	display: inline-block;
+	text-align: center;
+	vertical-align: middle;
+	min-width: 27px;
+	line-height: 24px;
+	height: 27px;
+	//transition: background 100ms;
+
+	&:hover {
+		background: rgba(0,0,0,0.2);
+	}
+
+	&:before {
+		font-family: "fontello";
+		font-size: 15px;
+		font-style: normal;
+		font-weight: normal;
+		speak: none;
+
+		display: inline-block;
+		text-decoration: inherit;
+		width: 1em;
+		margin-right: .2em;
+		text-align: center;
+
+		/* For safety - reset parent styles, that can break glyph codes*/
+		font-variant: normal;
+		text-transform: none;
+
+		/* fix buttons height, for twitter bootstrap */
+		line-height: 1em;
+
+		/* you can be more comfortable with increased icons size */
+		/* font-size: 120%; */
+
+		/* Font smoothing. That was taken from TWBS */
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+}
+
+.RichEditor-activeButton {
+	color: #000;
+	background: #ccc;
+
+	&:hover {
+		background: rgba(0,0,0,0.2);
+	}
+}
+
+.public-DraftStyleDefault-block {
+	margin: 0;
+}
+
+/**
+	Rich editor buttons
+	see content codes in /client/styles/fontello.css
+ */
+
+.block-quote:before {
+	content: '\f10e';
+}
+
+.block-ul:before {
+	content: '\f0ca';
+}
+
+.block-ol:before {
+	content: '\f0cb';
+}
+
+.block-code:before {
+	content: '\f121';
+}
+
+.rich-bold {
+	font-weight: bold;
+	font-family: "Times New Roman", Times, serif;
+}
+
+.rich-italic {
+	font-style: italic;
+	font-family: "Times New Roman", Times, serif;
+}
+
+.rich-underline {
+	text-decoration: underline;
+	font-family: "Times New Roman", Times, serif;
+}
+
+
+.rich-text {
+	white-space: normal;
+	line-height: 21px;
+	p {
+		margin: 0;
+	}
+
+}

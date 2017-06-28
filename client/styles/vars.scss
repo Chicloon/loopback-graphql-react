@@ -1,0 +1,227 @@
+$mainBg: #fff;
+$appBarBg: #37474f;
+
+$menuWidth: 260px;
+$pinnedMenuWidth: 50px;
+$menuBg: #47515e;
+$menuItemColor: #fff;
+$menuIcon: #9cb0bd;
+$menuBadgeBg: #00a2ff;
+$menuBadgeColor: #fff;
+$subMenuBg: rgba(28,40,46,0.3);
+$hoverMenuBg: rgba(48, 59, 74, 0.5);
+$activeMenuBg: #303b4a;
+$activeMenuIcon: #7ca0cd;
+$activeMenuColor: #fff;
+$activeMenuBorder: #7c0;
+
+$animationTime: 250ms;
+
+$text: #000;
+$brightText: #888;
+$veryBrightText: #bbb;
+$link: #555;
+$linkHover: #000;
+
+$shadowColor: rgba(0,0,0,0.3);
+$weakShadowColor: rgba(0,0,0,0.1);
+$coverColor: rgba(250,252,255,0.5);
+
+$disabledBg: #ccc;
+$disabledText: #333;
+$brightBg: #f0f0f0;
+$selectedBg: #def;
+$hoverBg: #ededed;
+$editBg: #fff;
+
+$border: #ccc;
+$brightBorder: #e0e0e0;
+$borderRadius: 2px;
+
+$comment: #fff8d0;
+
+$uiColor1: #2196F3;
+$uiColor1dark: #1186e3;
+$uiColor1alpha: rgba(33, 150, 243, 0.5);
+
+$uiColor2: #7c0;
+$uiColor2dark: #490;
+$uiColor2alpha: rgba(102, 187, 0, 0.5);
+
+$uiColor3: #888;
+$uiColor3dark: #444;
+$uiColor3alpha: rgba(64, 64, 64, 0.5);
+
+$mobile: 414px;
+$small: 768px;
+$medium: 992px;
+$large: 1200px;
+
+$inputHPad: 8px;
+$inputVPad: 5px;
+
+@mixin border-radius($radius: $borderRadius) {
+	-webkit-border-radius: $radius;
+	-moz-border-radius: $radius;
+	border-radius: $radius;
+}
+
+@mixin box-shadow($color: $shadowColor) {
+	-webkit-box-shadow: 0 1px 5px $color;
+	-moz-box-shadow: 0 1px 5px $color;
+	box-shadow: 0 1px 5px $color;
+}
+
+.cover {
+	background: $coverColor;
+	z-index: 100;
+	position: fixed;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+}
+
+@mixin respond-to($media) {
+	@if $media == xxs {
+		@media only screen and (max-width: $mobile) { @content; }
+	}
+	@else if $media == xs {
+		@media only screen and (min-width: $mobile + 1) and (max-width: $small - 1) { @content; }
+	}
+	@else if $media == sm {
+		@media only screen and (min-width: $small) and (max-width: $medium - 1) { @content; }
+	}
+	@else if $media == md {
+		@media only screen and (min-width: $medium) and (max-width: $large - 1) { @content; }
+	}
+	@else if $media == lg {
+		@media only screen and (min-width: $large) { @content; }
+	}
+}
+
+/* Bootstrap overrides */
+
+#root {
+	h1 {
+		font-size: 24px;
+		font-weight: 700;
+	}
+
+	h2 {
+		font-size: 18px;
+		font-weight: 700;
+	}
+
+	h3 {
+		font-size: 16px;
+	}
+
+	h1, h2, h3 {
+		margin-top: 1em;
+		margin-bottom: 1em;
+
+		&:first-of-type {
+			margin-top: 0;
+		}
+	}
+
+	hr {
+		clear: both;
+		margin-top: 10px;
+		margin-bottom: 10px;
+		border: 0;
+		border-top: 1px solid #ddd;
+		border-bottom: 1px solid #fff;
+	}
+
+	.btn {
+		padding: 4px 12px 0 12px;
+		height: 30px;
+	}
+
+	.btn-lg {
+		padding: 6px 12px 0 12px;
+		height: 35px;
+		font-size: 16px;
+	}
+
+	.btn {
+		//-webkit-box-shadow: 0 1px 1px $shadowColor;
+		//-moz-box-shadow: 0 1px 1px $shadowColor;
+		//box-shadow: 0 1px 1px $shadowColor;
+		text-decoration: none;
+		border-radius: $borderRadius;
+		transition: all $animationTime ease-out;
+
+		[class^="icon-"]:before, [class*=" icon-"]:before {
+			margin-left: -5px;
+			margin-right: 5px;
+			font-size: 12px;
+		}
+
+		&:hover {
+			text-decoration: none;
+			-webkit-box-shadow: 0 1px 3px $shadowColor;
+			-moz-box-shadow: 0 1px 3px $shadowColor;
+			box-shadow: 0 1px 3px $shadowColor;
+		}
+
+		&[disabled],
+		&[disabled]:hover {
+			cursor: default;
+			background-color: $disabledBg;
+			border-color: $disabledBg;
+			color: $text;
+		}
+	}
+
+	.btn-default {
+		background-color: $uiColor3;
+		border-color: $uiColor3;
+		color: white;
+		&:hover {
+			color: white;
+			background-color: $uiColor3dark;
+			border-color: $uiColor3dark;
+		}
+	}
+
+	.btn-primary {
+		background-color: $uiColor1;
+		border-color: $uiColor1;
+		&:hover {
+			background-color: $uiColor1dark;
+			border-color: $uiColor1dark;
+		}
+	}
+
+	.btn-danger {
+		background-color: #c00;
+		border-color: #c00;
+	}
+
+	input,
+	.form-control {
+		@include border-radius;
+		//border: 1px solid $border;
+		padding: $inputVPad $inputHPad;
+	}
+
+	textarea,
+	textarea.form-control {
+		@include border-radius;
+		height: auto;
+		//border: 1px solid $border;
+		line-height: 17px;
+		box-sizing: border-box;
+		padding: $inputHPad;
+	}
+
+	.label {
+		font-size: 100%;
+		font-weight: normal;
+		border-radius: $borderRadius;
+	}
+
+}

@@ -1,0 +1,41 @@
+variables:
+  GIT_STRATEGY: fetch
+  PATH_DEV: /var/www/dev.smartoffice
+  PATH_PROD: /var/www/smartoffice
+
+stages:
+  - deploy
+
+deploy_development:
+  stage: deploy
+  script:
+    - rsync -a --exclude=.git ./ $PATH_DEV/
+    - cd $PATH_DEV
+    - unset CI
+    - yarn install
+    - yarn upgrade
+    - node server/update-models.js
+    - pm2 restart client.config.js
+    - pm2 restart server.config.js
+  environment:
+    name: development
+    url: https://dev.smartoffice.smartunit.pro
+  only:
+    - development
+
+deploy_production:
+  stage: deploy
+  script:
+    - rsync -a --exclude=.git ./ $PATH_PROD/
+    - cd $PATH_PROD
+    - unset CI
+    - yarn install
+    - yarn upgrade
+    - npm run build
+    - NODE_ENV=production node server/update-models.js
+    - pm2 restart server.production.config.js
+  environment:
+    name: production
+    url: https://smartoffice.smartunit.pro
+  only:
+    - master

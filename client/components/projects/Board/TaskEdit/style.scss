@@ -1,0 +1,109 @@
+/* Board/TaskEdit */
+
+@import '../../../../styles/vars';
+
+.task-edit {
+
+	@include box-shadow();
+
+	.cover {
+		@extend .cover;
+		z-index: 100;
+	}
+
+	z-index: 101;
+	position: fixed;
+	top: 60px;
+	left: 0;
+	right: 0;
+	margin: auto;
+	width: 95%;
+	overflow-y: auto;
+	max-width: 600px;
+	height: calc(100% - 120px);
+	background: #f0f0f0;
+	border-radius: 3px;
+	color: #000;
+	padding: 15px;
+	transform: none;
+	transition: all 400ms cubic-bezier(.41, .17, .18, 1.29);
+
+	.field-label {
+		color: #555;
+		font-size: 13px;
+		margin-bottom: 10px;
+		a {
+			margin-left: 5px;
+		}
+	}
+
+	.status {
+		color: #444;
+		height: 20px;
+		line-height: 20px;
+		font-size: 12px;
+		transition: height 200ms, color 2s;
+
+		&.empty {
+			height: 0;
+		}
+
+		&.done {
+			color: #aaa;
+		}
+	}
+
+	textarea {
+		width: 100%;
+	}
+
+	.task-name {
+		textarea {
+			font-weight: bold;
+		}
+	}
+
+	.task-description {
+		color: #000;
+	}
+
+	.task-name,
+	.task-description {
+		textarea {
+			line-height: 17px;
+			padding: 5px 3px;
+			margin: -5px -3px;
+			border: 0;
+			background: none;
+			outline: none;
+
+			&:hover {
+				background: rgba(255, 255, 255, 0.25);
+			}
+
+			&:focus {
+				background: rgba(255, 255, 255, 0.5);
+			}
+		}
+	}
+
+	hr {
+		margin-top: 5px;
+		margin-bottom: 5px;
+	}
+
+	.task-labels {
+		padding: 5px 0;
+	}
+
+	.edit-actions {
+		.btn {
+			margin-right: 10px;
+
+			&[disabled] {
+				display: none;
+			}
+		}
+	}
+}
+

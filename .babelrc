@@ -1,0 +1,21 @@
+{
+	"presets": [
+		["es2015", {"modules": false}],
+		"stage-0",
+		"react"
+	],
+	"plugins": [
+		"react-hot-loader/babel",
+		"transform-decorators-legacy",
+		"transform-class-properties",
+		 ["import", { "libraryName": "antd", "style": true }] 
+	],
+	"env": {
+		"production": {
+			"plugins": [
+				"transform-react-constant-elements",
+				"transform-react-inline-elements"
+			]
+		}
+	}
+}

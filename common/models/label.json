@@ -1,0 +1,73 @@
+{
+	"name": "Label",
+	"description": "Метка",
+	"base": "PersistedModel",
+	"idInjection": true,
+	"mixins": {
+		"Owner": true
+	},
+	"options": {
+		"validateUpsert": true
+	},
+	"scope": {
+		"order": "priority DESC"
+	},
+	"properties": {
+		"name": {
+			"type": "string",
+			"required": false,
+			"index": true,
+			"description": "Название задачи"
+		},
+		"color": {
+			"type": "string",
+			"required": false,
+			"index": true,
+			"description": "Цвет метки в css совместимом формате."
+		},
+		"priority": {
+			"type": "Number",
+			"required": false,
+			"index": true,
+			"description": "Приоритет метки относительно других задач с другими метками. Меньшее значение - больший приоритет. Используется для ранжирования приоритетов задач между проектами."
+		},
+		"description": {
+			"type": "string",
+			"required": false,
+			"description": "Описение задачи"
+		}
+	},
+	"validations": [],
+	"relations": {
+		"tasks": {
+			"type": "hasAndBelongsToMany",
+			"model": "Task"
+		},
+		"budgets": {
+			"type": "hasAndBelongsToMany",
+			"model": "Budget"
+		},
+		"clients": {
+			"type": "hasAndBelongsToMany",
+			"model": "Client"
+		},
+		"payments": {
+			"type": "hasAndBelongsToMany",
+			"model": "Payment"
+		},
+		"persons": {
+			"type": "hasAndBelongsToMany",
+			"model": "Person"
+		},
+		"projects": {
+			"type": "hasAndBelongsToMany",
+			"model": "Project"
+		}
+	},
+	"acls": [{
+		"principalType": "ROLE",
+		"principalId": "$authenticated",
+		"permission": "ALLOW"
+	}],
+	"methods": {}
+}

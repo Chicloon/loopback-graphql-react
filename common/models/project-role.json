@@ -1,0 +1,39 @@
+{
+	"name": "ProjectRole",
+	"base": "PersistedModel",
+	"idInjection": true,
+	"options": {
+		"validateUpsert": true
+	},
+	"properties": {
+		"name": {
+			"type": "String",
+			"required": true,
+			"index": true
+		}
+	},
+	"validations": [],
+	"relations": {
+		"budgetRoles": {
+			"type": "hasMany",
+			"model": "BudgetRole",
+			"foreignKey": "projectRoleId"
+		},
+		"projectMembers": {
+			"type": "hasMany",
+			"model": "ProjectMember",
+			"foreignKey": "projectRoleId"
+		},
+		"payments": {
+			"type": "hasMany",
+			"model": "Payment",
+			"foreignKey": "projectRoleId"
+		}
+	},
+	"acls": [{
+		"principalType": "ROLE",
+		"principalId": "$authenticated",
+		"permission": "ALLOW"
+	}],
+	"methods": {}
+}

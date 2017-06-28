@@ -1,0 +1,7 @@
+{
+  "postgres": {
+    "name": "postgres",
+    "connector": "postgresql",
+    "database": "smartoffice"
+  }
+}

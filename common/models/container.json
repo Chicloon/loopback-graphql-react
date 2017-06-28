@@ -1,0 +1,13 @@
+{
+	"name": "Container",
+	"base": "Model",
+	"properties": {},
+	"validations": [],
+	"relations": {},
+	"acls": [{
+		"principalType": "ROLE",
+		"principalId": "$authenticated",
+		"permission": "ALLOW"
+	}],
+	"methods": []
+}

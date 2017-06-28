@@ -1,0 +1,151 @@
+@import "../../styles/vars";
+
+.task-show {
+	.task-name {
+		font-size: 16px;
+		font-weight: 500;
+
+		/*.task-menu {
+			float: right;
+			font-size: 14px;
+			margin: 0 0 10px -3px;
+			a {
+				color: $brightText;
+				&:hover {
+					color: $uiColor1;
+				}
+			}
+		}*/
+	}
+
+	.task-edit-btn {
+		margin-right: 15px;
+	}
+
+	.task-info {
+		color: $brightText;
+		margin: 15px 0 10px 0;
+		padding: 5px 10px;
+		background: $selectedBg;
+		//border-top: 1px solid $border;
+		//border-bottom: 1px solid $border;
+		border-left: 1px solid $border;
+		font-size: 13px;
+		line-height: 20px;
+
+		.task-info-right {
+			padding-top: 2px;
+			padding-left: 20px;
+			line-height: 20px;
+		}
+
+		[class^="icon-"], [class*=" icon-"] {
+			font-size: 14px;
+			margin-right: 5px;
+			&:before {
+				margin-left: 0;
+				margin-bottom: 1px;
+			}
+		}
+
+		.block {
+			display: inline-block;
+			margin: 2px 20px 2px 0;
+			//padding-right: 10px;
+			//border-right: 1px solid $border;
+			&:last-of-type {
+				border: 0;
+			}
+		}
+
+		em {
+			color: #000;
+			font-style: normal;
+		}
+
+		a {
+			color: #000;
+			&:hover {
+				color: $uiColor1;
+			}
+		}
+
+		.task-person {
+			display: inline-block;
+			vertical-align: middle;
+		}
+
+	}
+
+	.task-description {
+		margin: 15px 0;
+		//border-top: 1px solid $border;
+	}
+
+	.task-right {
+
+		label {
+			display: block;
+			font-weight: normal;
+		}
+	}
+
+	.task-person-div {
+		padding: 15px 0;
+	}
+
+	.task-labels {
+		margin-top: 15px;
+		margin-bottom: 15px;
+	}
+
+
+}
+
+/*
+.task-name .DraftEditor-root {
+	font-size: 16px;
+	font-weight: 400;
+}
+*/
+
+.label-item {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+
+	.label-color {
+		@include border-radius(3px);
+		border: 2px solid rgba(255, 255, 255, 0.1);
+		text-align: center;
+		display: inline-block;
+		width: 34px;
+		height: 24px;
+		line-height: 20px;
+		margin-right: 10px;
+		vertical-align: middle;
+	}
+
+	em {
+		margin-left: 5px;
+		font-style: normal;
+		color: $brightText;
+	}
+}
+
+.data-form {
+	.selected-labels {
+		.label {
+			@include border-radius;
+			display: inline-block;
+			padding: 5px 15px;
+			height: 30px;
+			font-size: 14px;
+			font-weight: normal;
+			line-height: 20px;
+			margin-right: 5px;
+			margin-bottom: 5px;
+		}
+	}
+}
+

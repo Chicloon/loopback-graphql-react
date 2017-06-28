@@ -1,0 +1,77 @@
+@import "../../../styles/vars";
+
+.inline-labels {
+
+	//display: inline-block;
+
+	.selected-labels {
+		display: inline-block;
+
+		.label {
+			@include border-radius;
+			display: inline-block;
+			padding: 5px 5px 5px 10px;
+			height: 30px;
+			font-size: 14px;
+			font-weight: normal;
+			line-height: 20px;
+			margin-right: 5px;
+			margin-bottom: 5px;
+
+			.remove-label {
+				cursor: pointer;
+			}
+		}
+	}
+
+	.add-labels {
+		display: block;
+		position: relative;
+
+		.add-btn {
+			@include border-radius;
+			background: #888;
+			color: #fff;
+			display: inline-block;
+			vertical-align: middle;
+			padding: 5px;
+			height: 30px;
+			line-height: 20px;
+			&:hover {
+				background: $uiColor1;
+			}
+		}
+
+		.inline-labels-input {
+			display: block;
+			position: absolute;
+			top: 0;
+			left: 0;
+			min-width: 300px;
+			height: 30px;
+			margin-bottom: 0;
+
+			&.right {
+				left: auto;
+				right: 0;
+			}
+
+			.drop-down {
+				[class^="icon-"], [class*=" icon-"] {
+					top: 7px;
+				}
+			}
+
+			input {
+				height: 28px;
+				padding: 5px;
+			}
+
+			.list {
+				top: 28px;
+				max-height: calc(8 * 34px);
+			}
+		}
+	}
+
+}

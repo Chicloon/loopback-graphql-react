@@ -1,0 +1,70 @@
+{
+	"name": "Client",
+	"plural": "clients",
+	"base": "PersistedModel",
+	"idInjection": true,
+	"mixins": {
+		"Owner": true
+	},
+	"options": {
+		"validateUpsert": true
+	},
+	"properties": {
+		"name": {
+			"type": "string",
+			"required": false,
+			"index": true
+		},
+		"personName": {
+			"type": "string",
+			"required": false,
+			"index": true
+		},
+		"personRole": {
+			"type": "string",
+			"required": false,
+			"index": true
+		},
+		"phone": {
+			"type": "string",
+			"required": false,
+			"index": true
+		},
+		"email": {
+			"type": "string",
+			"required": false,
+			"index": true
+		},
+		"comment": {
+			"type": "string",
+			"required": false,
+			"index": true
+		}
+	},
+	"validations": [],
+	"relations": {
+		"comments": {
+			"type": "hasAndBelongsToMany",
+			"model": "Comment"
+		},
+		"attachments": {
+			"type": "hasAndBelongsToMany",
+			"model": "Attachment"
+		},
+		"labels": {
+			"type": "hasAndBelongsToMany",
+			"model": "Label"
+		},
+		"projects": {
+			"type": "hasMany",
+			"model": "Project",
+			"foreignKey": "clientId"
+		}
+	},
+	"acls": [{
+		"principalType": "ROLE",
+		"principalId": "$authenticated",
+		"permission": "ALLOW"
+	}],
+	"methods": {}
+}
